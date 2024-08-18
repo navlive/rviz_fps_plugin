@@ -30,23 +30,35 @@
 #ifndef FPS_MOTION_VIEW_CONTROLLER
 #define FPS_MOTION_VIEW_CONTROLLER
 
+//#include </opt/ros/humble/opt/rviz_ogre_vendor/include/OGRE/OgreVector3.h>
+//#include </opt/ros/humble/opt/rviz_ogre_vendor/include/OGRE/OgreQuaternion.h>
 #include <OgreVector3.h>
 #include <OgreQuaternion.h>
 
-#include "rviz/frame_position_tracking_view_controller.h"
+#include "rviz_common/properties/bool_property.hpp"
+#include "rviz_common/properties/float_property.hpp"
+#include "rviz_common/properties/vector_property.hpp"
+#include "rviz_rendering/objects/shape.hpp"
+#include "rviz_default_plugins/visibility_control.hpp"
 
-using namespace rviz;
+//#include </opt/ros/humble/include/rviz_common/rviz_common/frame_position_tracking_view_controller.hpp>
+#include <rviz_common/frame_position_tracking_view_controller.hpp>
+//#include "rviz/frame_position_tracking_view_controller.h"
 
-namespace rviz
+//using namespace rviz;
+using namespace rviz_common;
+
+namespace rviz_common
 {
-class FloatProperty;
-class BoolProperty;
+using rviz_common::properties::FloatProperty;
+using rviz_common::properties::BoolProperty;
 class SceneNode;
 class Shape;
-class VectorProperty;
+using rviz_common::properties::VectorProperty;
+using rviz_common::properties::EnumProperty;
 
 /** @brief A first-person camera, controlled by yaw, pitch, and position. */
-class FPSMotionViewController : public FramePositionTrackingViewController
+class RVIZ_COMMON_PUBLIC FPSMotionViewController : public FramePositionTrackingViewController
 {
 Q_OBJECT
 public:
@@ -87,10 +99,10 @@ protected:
   void updateCamera(Ogre::Vector3& position, Ogre::Quaternion& orientation);
   Ogre::Quaternion getOrientation(); ///< Return a Quaternion based on the yaw and pitch properties.
 
-  FloatProperty* yaw_property_;                         ///< The camera's yaw (rotation around the y-axis), in radians
-  FloatProperty* pitch_property_;                       ///< The camera's pitch (rotation around the x-axis), in radians
-  VectorProperty* position_property_;
-  BoolProperty* fly_property_;
+  rviz_common::properties::FloatProperty* yaw_property_;                         ///< The camera's yaw (rotation around the y-axis), in radians
+  rviz_common::properties::FloatProperty* pitch_property_;                       ///< The camera's pitch (rotation around the x-axis), in radians
+  rviz_common::properties::VectorProperty* position_property_;
+  rviz_common::properties::BoolProperty* fly_property_;
 };
 
 } // end namespace rviz

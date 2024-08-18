@@ -26,7 +26,7 @@
 
 #include <fps_motion_tool.h>
 
-namespace rviz
+namespace rviz_common
 {
 
 FPSMotionTool::FPSMotionTool()
@@ -78,7 +78,7 @@ void FPSMotionTool::setFallbackViewControllerProperty()
   fallback_view_controller_property_->clearOptions();
   m_view_controller_classes.clear();
 
-  m_view_controller_classes = context_->getViewManager()->getFactory()->getDeclaredClassIds();
+  // mfallon m_view_controller_classes = context_->getViewManager()->getFactory()->getDeclaredClassIds();
 
   for( int i = 0; i < m_view_controller_classes.size(); i++ )
   {
@@ -123,11 +123,11 @@ void FPSMotionTool::activate()
 
 void FPSMotionTool::deactivate(){ }
 
-int FPSMotionTool::processKeyEvent(QKeyEvent *event, rviz::RenderPanel* panel)
+int FPSMotionTool::processKeyEvent(QKeyEvent *event, rviz_common::RenderPanel* panel)
 {
   if(panel->getViewController()->getClassId().toStdString() != "rviz/FPSMotion")
   {
-    ROS_WARN("The FPS Motion Tool only works with an active rviz/FPSMotion ViewController. \n If you use the shortkeys to select ('e') and deselect ('e') this tool, the switching will be automatized for you.");
+    //ROS_WARN("The FPS Motion Tool only works with an active rviz/FPSMotion ViewController. \n If you use the shortkeys to select ('e') and deselect ('e') this tool, the switching will be automatized for you.");
   }
   else
   {
@@ -142,56 +142,56 @@ int FPSMotionTool::processKeyEvent(QKeyEvent *event, rviz::RenderPanel* panel)
     if ((event->key() == Qt::Key_W && !m_left_hand_mode) || (event->key() == Qt::Key_Up && m_left_hand_mode))
     {
       if(m_fly_mode)
-        ((rviz::FPSMotionViewController*) panel->getViewController())->fly(0.0, 0.0, -update);
+        ((rviz_common::FPSMotionViewController*) panel->getViewController())->fly(0.0, 0.0, -update);
       else
-        ((rviz::FPSMotionViewController*) panel->getViewController())->move(0.0, 0.0, -update);
+        ((rviz_common::FPSMotionViewController*) panel->getViewController())->move(0.0, 0.0, -update);
     }
 
     if ((event->key() == Qt::Key_S && !m_left_hand_mode) || (event->key() == Qt::Key_Down && m_left_hand_mode))
     {
       if(m_fly_mode)
-        ((rviz::FPSMotionViewController*) panel->getViewController())->fly(0.0, 0.0, update);
+        ((rviz_common::FPSMotionViewController*) panel->getViewController())->fly(0.0, 0.0, update);
       else
-        ((rviz::FPSMotionViewController*) panel->getViewController())->move(0.0, 0.0, update);
+        ((rviz_common::FPSMotionViewController*) panel->getViewController())->move(0.0, 0.0, update);
     }
 
     // move left / right
     if ((event->key() == Qt::Key_A && !m_left_hand_mode) || (event->key() == Qt::Key_Left && m_left_hand_mode))
     {
       if(m_fly_mode)
-      ((rviz::FPSMotionViewController*) panel->getViewController())->fly(-update, 0.0, 0.0);
+      ((rviz_common::FPSMotionViewController*) panel->getViewController())->fly(-update, 0.0, 0.0);
       else
-      ((rviz::FPSMotionViewController*) panel->getViewController())->move(-update, 0.0, 0.0);
+      ((rviz_common::FPSMotionViewController*) panel->getViewController())->move(-update, 0.0, 0.0);
     }
 
     if ((event->key() == Qt::Key_D && !m_left_hand_mode) || (event->key() == Qt::Key_Right && m_left_hand_mode))
     {
       if(m_fly_mode)
-        ((rviz::FPSMotionViewController*) panel->getViewController())->fly(update, 0.0, 0.0);
+        ((rviz_common::FPSMotionViewController*) panel->getViewController())->fly(update, 0.0, 0.0);
       else
-        ((rviz::FPSMotionViewController*) panel->getViewController())->move(update, 0.0, 0.0);
+        ((rviz_common::FPSMotionViewController*) panel->getViewController())->move(update, 0.0, 0.0);
     }
 
     // move up / down
     if ((event->key() == Qt::Key_Up && !m_left_hand_mode) || (event->key() == Qt::Key_W && m_left_hand_mode))
     {
-        ((rviz::FPSMotionViewController*) panel->getViewController())->changeZ(update);
+        ((rviz_common::FPSMotionViewController*) panel->getViewController())->changeZ(update);
     }
 
     if ((event->key() == Qt::Key_Down && !m_left_hand_mode) || (event->key() == Qt::Key_S && m_left_hand_mode))
     {
-      ((rviz::FPSMotionViewController*) panel->getViewController())->changeZ(-update);
+      ((rviz_common::FPSMotionViewController*) panel->getViewController())->changeZ(-update);
     }
 
     // yaw left / down
     if ((event->key() == Qt::Key_Left && !m_left_hand_mode) || (event->key() == Qt::Key_A && m_left_hand_mode))
     {
-        ((rviz::FPSMotionViewController*) panel->getViewController())->yaw(update);
+        ((rviz_common::FPSMotionViewController*) panel->getViewController())->yaw(update);
     }
 
     if ((event->key() == Qt::Key_Right && !m_left_hand_mode) || (event->key() == Qt::Key_D && m_left_hand_mode))
     {
-      ((rviz::FPSMotionViewController*) panel->getViewController())->yaw(-update);
+      ((rviz_common::FPSMotionViewController*) panel->getViewController())->yaw(-update);
     }
 
     // switch walk/fly mode
@@ -209,7 +209,7 @@ int FPSMotionTool::processKeyEvent(QKeyEvent *event, rviz::RenderPanel* panel)
       fly_property_->setValue(m_fly_mode);
       fly_property_->show();
 
-      ((rviz::FPSMotionViewController*) panel->getViewController())->reset();
+      ((rviz_common::FPSMotionViewController*) panel->getViewController())->reset();
     }
 
     // deactivate tool and switch back into interactive mode
@@ -223,7 +223,7 @@ int FPSMotionTool::processKeyEvent(QKeyEvent *event, rviz::RenderPanel* panel)
   return Render;
 }
 
-int FPSMotionTool::processMouseEvent(rviz::ViewportMouseEvent& event)
+int FPSMotionTool::processMouseEvent(rviz_common::ViewportMouseEvent& event)
 {
   if (event.panel->getViewController())
   {
@@ -235,5 +235,5 @@ int FPSMotionTool::processMouseEvent(rviz::ViewportMouseEvent& event)
 
 } // end namespace rviz
 
-#include <pluginlib/class_list_macros.h>
-PLUGINLIB_EXPORT_CLASS(rviz::FPSMotionTool, rviz::Tool)
+#include <pluginlib/class_list_macros.hpp>
+PLUGINLIB_EXPORT_CLASS(rviz_common::FPSMotionTool, rviz_common::Tool)

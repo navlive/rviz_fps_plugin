@@ -1,20 +1,35 @@
-<package>
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
   <name>rviz_fps_plugin</name>
-  <version>0.1.0</version>
-  <description>
-    The rviz_fps_plugin package contains an additional ViewController and a Tool Plugin to navigate RViz like an FPS-Shooter.
+  <version>0.0.0</version>
+  <description>Scan to BIM</description>
+  <maintainer email="dwisth@navlive.co.uk">David Wisth</maintainer>
+  <license>Proprietary</license>
 
-    To enable the tool press 'q' and enable the 'FPSMotion' ViewController. Use the 'wasd' keys for walking.
-    By pressing 'f' one can switch between walk or fly mode. By pressing 'r' you can reset the view controller.
-  </description>
-  <license>BSD</license>
-  <url>http://ros.org/wiki/rviz_fps_plugin</url>
-  <author>hdeeken</author>
-  <maintainer email="hdeeken@uni-osnabrueck.de">Henning Deeken</maintainer>
-  <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>rviz</build_depend>
-  <run_depend>rviz</run_depend>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rviz2</depend>
+  <build_depend>rviz_assimp_vendor</build_depend>
+  <build_depend>rviz_ogre_vendor</build_depend>
+  <depend>rviz_common</depend>
+  <depend>rviz_rendering</depend>
+  <depend>rviz_default_plugins</depend>
+
+
+  <depend>pcl_conversions</depend>
+  <depend>rclcpp</depend>
+  <depend>sensor_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>tf2_eigen</depend>
+  <depend>visualization_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>pcl_msgs</depend>
+
+  <depend>icp_odometry</depend>
+  <depend>vilens_slam_utils</depend>
+
   <export>
-    <rviz plugin="${prefix}/plugin_description.xml"/>
+    <build_type>ament_cmake</build_type>
   </export>
 </package>

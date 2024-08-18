@@ -34,26 +34,42 @@
 #include <QMessageBox>
 #include <QApplication>
 
-#include <ros/console.h>
-#include <rviz/viewport_mouse_event.h>
-#include <rviz/visualization_manager.h>
-#include <rviz/geometry.h>
-#include <rviz/properties/vector_property.h>
-#include <rviz/properties/float_property.h>
-#include <rviz/properties/enum_property.h>
-#include <rviz/properties/bool_property.h>
-#include <rviz/tool.h>
-#include <rviz/tool_manager.h>
-#include <rviz/display_group.h>
-#include <rviz/display_context.h>
-#include <rviz/render_panel.h>
-#include <rviz/viewport_mouse_event.h>
-#include <rviz/selection/selection_manager.h>
-#include <rviz/view_controller.h>
-#include <rviz/view_manager.h>
-#include <rviz/load_resource.h>
+#include <rclcpp/node.hpp>
+//#include <ros/console.h>
 
-#include <rviz/default_plugin/tools/move_tool.h>
+#include <OgreVector.h>
+#include <OgreQuaternion.h>
+
+
+#include <rviz_common/viewport_mouse_event.hpp>
+#include <rviz_common/visualization_manager.hpp>
+
+#include <rviz_rendering/geometry.hpp>
+
+#include <rviz_common/properties/vector_property.hpp>
+#include <rviz_common/properties/float_property.hpp>
+#include <rviz_common/properties/enum_property.hpp>
+#include <rviz_common/properties/bool_property.hpp>
+
+//#include <rviz/viewport_mouse_event.h>
+//#include <rviz/visualization_manager.h>
+//#include <rviz/geometry.h>
+//#include <rviz/properties/vector_property.h>
+//#include <rviz/properties/float_property.h>
+//#include <rviz/properties/enum_property.h>
+//#include <rviz/properties/bool_property.h>
+#include <rviz_common/tool.hpp>
+#include <rviz_common/tool_manager.hpp>
+#include <rviz_common/display_group.hpp>
+#include <rviz_common/display_context.hpp>
+#include <rviz_common/render_panel.hpp>
+#include <rviz_common/viewport_mouse_event.hpp>
+#include <rviz_common/interaction/selection_manager.hpp>
+#include <rviz_common/view_controller.hpp>
+#include <rviz_common/view_manager.hpp>
+#include <rviz_common/load_resource.hpp>
+
+#include <rviz_default_plugins/tools/move/move_tool.hpp>
 
 #include <fps_motion_view_controller.h>
 
@@ -64,17 +80,17 @@
  *@brief Implements a rviz tool that allows to navigate in a egoshooter mode.
  */
 
-namespace Ogre
-{
-class SceneNode;
-class Vector3;
-}
+//namespace Ogre
+//{
+//class SceneNode;
+//class Vector3;
+//}
 
-namespace rviz
+namespace rviz_common
 {
 
 class FPSMotionConfigWidget;
-class FPSMotionTool: public rviz::Tool
+class FPSMotionTool: public rviz_common::Tool
 {
 Q_OBJECT
 
@@ -85,8 +101,8 @@ public:
   virtual void activate();
   virtual void deactivate();
 
-  virtual int processKeyEvent(QKeyEvent* event, rviz::RenderPanel* panel);
-  virtual int processMouseEvent(rviz::ViewportMouseEvent& event);
+  virtual int processKeyEvent(QKeyEvent* event, rviz_common::RenderPanel* panel);
+  virtual int processMouseEvent(rviz_common::ViewportMouseEvent& event);
 
 private Q_SLOTS:
 
@@ -130,12 +146,12 @@ private:
   QString m_fallback_view_controller;
   std::vector<ViewController*> m_view_controller;
 
-  FloatProperty* step_length_property_;
-  FloatProperty* boost_property_;
-  BoolProperty* fly_property_;
-  BoolProperty* left_hand_property_;
-  EnumProperty* fallback_tool_property_;
-  EnumProperty* fallback_view_controller_property_;
+  rviz_common::properties::FloatProperty* step_length_property_;
+  rviz_common::properties::FloatProperty* boost_property_;
+  rviz_common::properties::BoolProperty* fly_property_;
+  rviz_common::properties::BoolProperty* left_hand_property_;
+  rviz_common::properties::EnumProperty* fallback_tool_property_;
+  rviz_common::properties::EnumProperty* fallback_view_controller_property_;
 
   void setFallbackToolProperty();
   void setFallbackViewControllerProperty();

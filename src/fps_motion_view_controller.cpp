@@ -27,6 +27,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+//#include </opt/ros/humble/opt/rviz_ogre_vendor/include/OGRE/OgreViewport.h>
 #include <OgreViewport.h>
 #include <OgreQuaternion.h>
 #include <OgreVector3.h>
@@ -34,18 +35,28 @@
 #include <OgreSceneManager.h>
 #include <OgreCamera.h>
 
-#include <rviz/uniform_string_stream.h>
-#include <rviz/display_context.h>
-#include <rviz/viewport_mouse_event.h>
-#include <rviz/geometry.h>
-#include <rviz/ogre_helpers/shape.h>
-#include <rviz/properties/float_property.h>
-#include <rviz/properties/vector_property.h>
-#include <rviz/properties/bool_property.h>
+#include <rviz_common/uniform_string_stream.hpp>
+#include <rviz_common/display_context.hpp>
+#include <rviz_common/viewport_mouse_event.hpp>
+#include <rviz_rendering/geometry.hpp>
+#include <rviz_rendering/objects/shape.hpp>
+#include <rviz_common/properties/float_property.hpp>
+#include <rviz_common/properties/vector_property.hpp>
+#include <rviz_common/properties/bool_property.hpp>
+
+
+//#include <rviz/uniform_string_stream.h>
+//#include <rviz_common/display_context.hpp>
+//#include <rviz_common/viewport_mouse_event.hpp>
+//#include <rviz/geometry.h>
+//#include <rviz/ogre_helpers/shape.h>
+//#include <rviz/properties/float_property.h>
+//#include <rviz/properties/vector_property.h>
+//#include <rviz/properties/bool_property.h>
 
 #include <fps_motion_view_controller.h>
 
-namespace rviz
+namespace rviz_common
 {
 
 static const Ogre::Quaternion ROBOT_TO_CAMERA_ROTATION =
@@ -58,6 +69,7 @@ static const float PITCH_LIMIT_HIGH = Ogre::Math::HALF_PI - 0.001;
 FPSMotionViewController::FPSMotionViewController()
 {
   yaw_property_ = new FloatProperty( "Yaw", 0, "Rotation of the camera around the Z (up) axis.", this );
+  
   pitch_property_ = new FloatProperty( "Pitch", 0, "How much the camera is tipped downward.", this);
   pitch_property_->setMax( Ogre::Math::HALF_PI - 0.001 );
   pitch_property_->setMin( -pitch_property_->getMax() );
@@ -146,7 +158,7 @@ void FPSMotionViewController::setPropertiesFromCamera( Ogre::Camera* source_came
   }
 
   pitch_property_->setFloat( pitch );
-  yaw_property_->setFloat( mapAngleTo0_2Pi( yaw ));
+  yaw_property_->setFloat( rviz_rendering::mapAngleTo0_2Pi( yaw ));
   position_property_->setVector( source_camera->getPosition() );
 }
 
@@ -188,7 +200,7 @@ void FPSMotionViewController::updateCamera(Ogre::Vector3& position, Ogre::Quater
 
 void FPSMotionViewController::yaw( float angle )
 {
-  yaw_property_->setFloat( mapAngleTo0_2Pi( yaw_property_->getFloat() + angle ));
+  yaw_property_->setFloat( rviz_rendering::mapAngleTo0_2Pi( yaw_property_->getFloat() + angle ));
 }
 
 void FPSMotionViewController::pitch( float angle )
@@ -230,5 +242,8 @@ void FPSMotionViewController::fly( float x, float y, float z )
 
 } // end namespace rviz
 
-#include <pluginlib/class_list_macros.h>
-PLUGINLIB_EXPORT_CLASS(rviz::FPSMotionViewController, rviz::ViewController)
+#include <pluginlib/class_list_macros.hpp>
+PLUGINLIB_EXPORT_CLASS(rviz_common::FPSMotionViewController, rviz_common::ViewController)
+
+//PLUGINLIB_EXPORT_CLASS(
+//  rviz_default_plugins::view_controllers::OrbitViewController, rviz_common::ViewController)
