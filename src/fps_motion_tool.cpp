@@ -78,7 +78,9 @@ void FPSMotionTool::setFallbackViewControllerProperty()
   fallback_view_controller_property_->clearOptions();
   m_view_controller_classes.clear();
 
-  // mfallon m_view_controller_classes = context_->getViewManager()->getFactory()->getDeclaredClassIds();
+  // mfallon: this was removed from view_manager.hpp:
+  // m_view_controller_classes = context_->getViewManager()->getFactory()->getDeclaredClassIds();
+  m_view_controller_classes = context_->getViewManager()->getDeclaredClassIdsFromFactory();
 
   for( int i = 0; i < m_view_controller_classes.size(); i++ )
   {
