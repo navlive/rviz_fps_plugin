@@ -4,7 +4,7 @@
   <name>rviz_fps_plugin</name>
   <version>0.0.0</version>
   <description>Scan to BIM</description>
-  <maintainer email="dwisth@navlive.co.uk">David Wisth</maintainer>
+  <maintainer email="mfallon@navlive.co.uk">Maurice Fallon</maintainer>
   <license>Proprietary</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
@@ -16,18 +16,7 @@
   <depend>rviz_rendering</depend>
   <depend>rviz_default_plugins</depend>
 
-
-  <depend>pcl_conversions</depend>
   <depend>rclcpp</depend>
-  <depend>sensor_msgs</depend>
-  <depend>nav_msgs</depend>
-  <depend>tf2_eigen</depend>
-  <depend>visualization_msgs</depend>
-  <depend>std_msgs</depend>
-  <depend>pcl_msgs</depend>
-
-  <depend>icp_odometry</depend>
-  <depend>vilens_slam_utils</depend>
 
   <export>
     <build_type>ament_cmake</build_type>

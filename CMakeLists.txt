@@ -2,17 +2,7 @@ cmake_minimum_required(VERSION 3.8)
 project(rviz_fps_plugin)
 
 #add_compile_options(-DWITH_QT:BOOL=OFF)
-
-## System dependencies are found with CMake's conventions
 find_package(ament_cmake REQUIRED)
-find_package(PCL REQUIRED COMPONENTS common io filters visualization segmentation surface)
-find_package(CGAL REQUIRED)
-#find_package(Eigen3 REQUIRED CONFIG)
-find_package(Eigen3 3.1.0 REQUIRED CONFIG)
-find_package(GMP REQUIRED)
-find_package(MPFR REQUIRED)
-# ROS
-
 
 find_package(ament_cmake_ros REQUIRED)
 
@@ -34,18 +24,6 @@ find_package(Qt5Widgets REQUIRED)
 ## etc because they can conflict with boost signals, so define QT_NO_KEYWORDS here.
 add_definitions(-DQT_NO_KEYWORDS)
 
-
-
-find_package(pcl_conversions REQUIRED)
-find_package(rclcpp REQUIRED)
-find_package(sensor_msgs REQUIRED)
-find_package(nav_msgs REQUIRED)
-find_package(std_msgs REQUIRED)
-find_package(vilens_slam_utils REQUIRED)
-find_package(icp_odometry REQUIRED)
-find_package(pcl_msgs REQUIRED)
-find_package(visualization_msgs REQUIRED)
-find_package(tf2_eigen REQUIRED)
 
 include_directories(include
   SYSTEM ${EIGEN3_INCLUDE_DIRS})
